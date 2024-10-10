@@ -45,7 +45,7 @@ public class UserService {
     }
 
     @Transactional
-    @Cacheable(cacheNames="userCache", key="#nickname")
+    @Cacheable(cacheNames="userCache", key="#nickname", cacheManager = "jCacheCacheManager")
     public UserListResponse searchUserNickname(String nickname) {
         if (Strings.isBlank(nickname)) throw new InvalidRequestException("User nickname cannot be empty");
 
