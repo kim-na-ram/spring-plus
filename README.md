@@ -34,3 +34,23 @@
   * 31ms
 * Cache Hit 의 경우
   * 2ms ~ 6ms
+
+<br>
+
+#### Ehcache
+![JMeter_성능개선후_ehcache](https://github.com/user-attachments/assets/7c69eb3d-518d-4108-9f52-6a7e7da9cc45)
+![JMeter_성능개선후_ehcache_cache_miss](https://github.com/user-attachments/assets/bae1f7a3-b447-47ab-980e-f56fd1dd9399)
+* Cache Miss 의 경우
+  * 487ms
+* Cache Hit 의 경우
+  * 2ms ~ 6ms
+
+<br>
+
+#### Ehcache + DB Index
+![JMeter_성능개선후_인덱스_ehcache](https://github.com/user-attachments/assets/1e338c93-8c38-496f-94d3-c851168baf73)
+![JMeter_성능개선후_인덱스_ehcache_cache_miss](https://github.com/user-attachments/assets/39cce56d-e453-40ef-829c-73986d1b306a)
+* Cache Miss 의 경우
+  * 9ms
+* Cache Hit 의 경우
+  * 2ms ~ 4ms
