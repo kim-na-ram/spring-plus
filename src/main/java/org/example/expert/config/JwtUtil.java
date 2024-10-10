@@ -16,11 +16,11 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 
+import static org.example.expert.domain.common.constant.Constant.*;
+
 @Slf4j(topic = "JwtUtil")
 @Component
 public class JwtUtil {
-
-    private static final String BEARER_PREFIX = "Bearer ";
     private static final long TOKEN_TIME = 60 * 60 * 1000L; // 60분
 
     @Value("${jwt.secret.key}")
@@ -34,14 +34,15 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    public String createToken(Long userId, String email, UserRole userRole) {
+    public String createToken(Long userId, String email, String nickname, UserRole userRole) {
         Date date = new Date();
 
         return BEARER_PREFIX +
                 Jwts.builder()
                         .setSubject(String.valueOf(userId))
-                        .claim("email", email)
-                        .claim("userRole", userRole)
+                        .claim(EMAIL, email)
+                        .claim(NICKNAME, nickname)
+                        .claim(USER_ROLE, userRole.getUserRole())
                         .setExpiration(new Date(date.getTime() + TOKEN_TIME))
                         .setIssuedAt(date) // 발급일
                         .signWith(key, signatureAlgorithm) // 암호화 알고리즘
@@ -50,7 +51,7 @@ public class JwtUtil {
 
     public String substringToken(String tokenValue) {
         if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
-            return tokenValue.substring(7);
+            return tokenValue.substring(BEARER_PREFIX.length());
         }
         throw new ServerException("Not Found Token");
     }
